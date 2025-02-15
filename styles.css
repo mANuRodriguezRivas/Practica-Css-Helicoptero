@@ -2,6 +2,11 @@
     margin: 0px;
     padding: 0px;
 }
+body{
+    font-family: "Tiny5", serif;
+    font-weight: 200;
+    font-style: normal;
+}
 
 .gameBg{
     background-image: url('media/bg.png');
@@ -16,6 +21,7 @@
 h2{
     font-size: 15px;
     text-align: center;
+    color: white;
 }
 
 .menu{
@@ -74,9 +80,9 @@ button:hover:active{
     align-items: center;
     justify-content: center;
 }
-.botonesAudio{
+.sonido{
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
 }
 
