@@ -15,6 +15,13 @@ let arrayComida = [
     {x: 0, y: 0},
     {x: 0, y: 0}
 ];
+
+
+let anchoSuperviviente = 50;
+let altoSuperviviente = 50;
+let coordenadasAleatorias = [];
+
+
 let anchoComida = 50;
 let altComida = 50;
 let supervivienteX = 0;
@@ -23,6 +30,15 @@ let coordenadasAleatorias = [];
 
 posicionarSupervivientes(listaSupervivientes);
 
+
+// Genera posición aleatoria para las comida sin que se sobrelapan
+function generaPosicionComida(contenedorComidaX, contenedorComidaY) {
+    for (let i = 0; i < arrayComida.length; i++) {
+        let randomX, randomY, overlap;
+        do {
+            randomX = Math.random() * (contenedorComidaX - anchoComida);
+            randomY = Math.random() * (contenedorComidaY - altComida);
+=======
 //Genera posición aleatoria para las comida sin que se sobrelapan
 function generaPosicionComida(){
     for (let i=0; i<arrayComida.length; i++){
@@ -32,9 +48,10 @@ function generaPosicionComida(){
         do{
             randomX = Math.random() * (pantallaX - anchoComida);
             randomY = Math.random() * (pantallaY - altComida);
+
             overlap = false;
-            for (let j=0; j<i; j++) {
-                if (Math.abs(randomX - arrayComida[j].x) < anchoComida && Math.abs(randomY - arrayComida[j].y) < altComida){
+            for (let j = 0; j < i; j++) {
+                if (Math.abs(randomX - arrayComida[j].x) < anchoComida && Math.abs(randomY - arrayComida[j].y) < altComida) {
                     overlap = true;
                     break;
                 }
@@ -45,13 +62,19 @@ function generaPosicionComida(){
     }
     pintarComidas(contenedorPrincipal);
 }
+
 // Pinta las comidas
+
+function pintarComidas(contenedorComida) {
+    for (let i = 0; i < arrayComida.length; i++) {
+
 function pintarComidas(contenedorComida){
     let comidas = document.querySelectorAll('.comida');
     for (let i=0; i<comidas.length; i++){
         comidas[i].remove();
     }
     for (let i=0; i<arrayComida.length; i++){
+
         let divComida = document.createElement('div');
         divComida.classList.add('comida');
         divComida.style.top = arrayComida[i].y + 'px';
@@ -60,6 +83,12 @@ function pintarComidas(contenedorComida){
         contenedorComida.appendChild(divComida);
     }
 }
+
+
+// Aparición aleatoria de supervivientes.
+function aleatorio() {
+    let coordRandomX = Math.round(Math.random() * window.innerWidth);
+    let coordRandomY = Math.round(Math.random() * window.innerHeight);
 
 //Recolección comida
 function recoleccionComida(supervivienteSeleccionado){
@@ -99,6 +128,7 @@ function desaparicionComida(idComida){
     let comida = document.getElementById(idComida);
     comida.style.animation = 'desaparicion 0.5s 3s ease-out forwards';
     setTimeout(pintarComidas, 4000, contenedorPrincipal)
+
 }
 // Cambio cursor cuando hover sobre superviviente (si helicoptero es activo)
 document.addEventListener('mouseover', function(e){
@@ -113,31 +143,57 @@ function r1() {
     audio.src = 'media/creedence.mp3';
     audio.play();
 }
+
 function r2() {
     audio.pause();
     audio.src = 'media/wagner.mp3';
     audio.play();
 }
+
 function r3() {
     audio.pause();
     audio.src = 'media/acdc.mp3';
     audio.play();
 }
-function mute(){
+
+function mute() {
     audio.pause();
 }
+
+// Aparición aleatoria de supervivientes.
 function coordenadasAleatoriasSupervivientes() {
+
+    let coordRandomX = Math.round(Math.random() * (window.innerWidth - anchoSuperviviente));
+    let coordRandomY = Math.round(Math.random() * (window.innerHeight - altoSuperviviente));
+    return [coordRandomX, coordRandomY];
+
     let coordRandomX = Math.round(Math.random()* (pantallaX - superviviente.offsetWidth));
     let coordRandomY = Math.round(Math.random()* (pantallaY - superviviente.offsetHeight));
     coordenadasAleatorias = [coordRandomX, coordRandomY];
+
 }
 
+// Posiciona a los supervivientes en la pantalla
 function posicionarSupervivientes(supervivientes) {
     for (let i = 0; i < supervivientes.length; i++) {
-        coordenadasAleatoriasSupervivientes();
-        let coordenadas = coordenadasAleatorias; 
+        let coordenadas = coordenadasAleatoriasSupervivientes();
         supervivientes[i].style.left = coordenadas[0] + 'px';
         supervivientes[i].style.top = coordenadas[1] + 'px';
     }
     generaPosicionComida()
 }
+
+
+// Obtiene la lista de supervivientes y los posiciona cuando la página carga
+window.onload = function() {
+    let elementos = document.getElementsByClassName("superviviente");
+    let listaSupervivientes = [];
+
+    for (let i = 0; i < elementos.length; i++) {
+        listaSupervivientes[i] = elementos[i];
+    }
+
+    posicionarSupervivientes(listaSupervivientes);
+};
+
+
