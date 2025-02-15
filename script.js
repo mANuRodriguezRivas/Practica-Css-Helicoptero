@@ -41,3 +41,10 @@ function pintarComidas(contenedorComida){
         contenedorComida.appendChild(divComida);
     }
 }
+
+// Aparición aleatoria de supervivientes.
+
+function aleatorio() {
+    let coordRandomX = Math.round(Math.random()* window.innerWidth);
+    let coordRandomY = Math.round(Math.random()* window.innerHeight);
+}
