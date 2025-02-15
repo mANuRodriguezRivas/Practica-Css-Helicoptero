@@ -117,6 +117,7 @@ button:hover:active{
 .heliPic{
     height: 120px;
     transform: rotate(90deg);
+}
 
 .superviviente {
     position: absolute;
