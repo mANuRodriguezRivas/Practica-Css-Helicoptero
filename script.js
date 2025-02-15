@@ -99,12 +99,6 @@ function desaparicionComida(idComida){
     setTimeout(pintarComidas, 2000, contenedorPrincipal)
 }
 
-// Aparición aleatoria de supervivientes.
-function aleatorio() {
-    let coordRandomX = Math.round(Math.random()* window.innerWidth);
-    let coordRandomY = Math.round(Math.random()* window.innerHeight);
-}
-
 // Musica
 function r1() {
     audio.pause();
