@@ -1,7 +1,11 @@
 let contenedorPrincipal = document.querySelector('.gameBg');
 let listaSupervivientes = document.getElementsByClassName("superviviente");
+let superviviente = document.querySelector('.superviviente');
 let pantallaX = window.innerWidth;
 let pantallaY = window.innerHeight;
+
+let helicopteroActivo = true;
+
 
 let arrayComida = [
     {x: 0, y: 0},
@@ -59,8 +63,9 @@ function pintarComidas(contenedorComida){
 
 //Recolección comida
 function recoleccionComida(supervivienteSeleccionado){
-    supervivienteSeleccionadoX = parseFloat(supervivienteSeleccionado.style.left);
-    supervivienteSeleccionadoY = parseFloat(supervivienteSeleccionado.style.top);
+    supervivienteSeleccionadoY = parseFloat(supervivienteSeleccionado.style.left);
+    supervivienteSeleccionadoX = parseFloat(supervivienteSeleccionado.style.top);
+    console.log()
     supervivienteSeleccionado.style.animation = 'none';
     void supervivienteSeleccionado.offsetWidth;
     let closestComidaCoords = [];
