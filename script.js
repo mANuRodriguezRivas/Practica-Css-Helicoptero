@@ -64,7 +64,6 @@ function pintarComidas(contenedorComida){
 function recoleccionComida(supervivienteSeleccionado){
     supervivienteSeleccionadoY = parseFloat(supervivienteSeleccionado.style.top);
     supervivienteSeleccionadoX = parseFloat(supervivienteSeleccionado.style.left);
-    console.log()
     supervivienteSeleccionado.style.animation = 'none';
     void supervivienteSeleccionado.offsetWidth;
     let closestComidaCoords = [];
