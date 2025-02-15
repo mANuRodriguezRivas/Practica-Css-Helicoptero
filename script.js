@@ -55,7 +55,6 @@ function pintarComidas(contenedorComida){
         divComida.classList.add('comida');
         divComida.style.top = arrayComida[i].y + 'px';
         divComida.style.left = arrayComida[i].x + 'px';
-        divComida.innerHTML = `Comida: ${i}`;
         divComida.id = `comida_${i}`;
         contenedorComida.appendChild(divComida);
     }
@@ -63,8 +62,8 @@ function pintarComidas(contenedorComida){
 
 //Recolección comida
 function recoleccionComida(supervivienteSeleccionado){
-    supervivienteSeleccionadoY = parseFloat(supervivienteSeleccionado.style.left);
-    supervivienteSeleccionadoX = parseFloat(supervivienteSeleccionado.style.top);
+    supervivienteSeleccionadoY = parseFloat(supervivienteSeleccionado.style.top);
+    supervivienteSeleccionadoX = parseFloat(supervivienteSeleccionado.style.left);
     console.log()
     supervivienteSeleccionado.style.animation = 'none';
     void supervivienteSeleccionado.offsetWidth;
