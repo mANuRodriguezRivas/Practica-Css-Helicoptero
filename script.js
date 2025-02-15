@@ -100,6 +100,12 @@ function desaparicionComida(idComida){
     comida.style.animation = 'desaparicion 0.5s 3s ease-out forwards';
     setTimeout(pintarComidas, 4000, contenedorPrincipal)
 }
+// Cambio cursor cuando hover sobre superviviente (si helicoptero es activo)
+document.addEventListener('mouseover', function(e){
+    if (e.target.classList.contains('superviviente') && helicopteroActivo){
+        e.target.style.cursor = 'url("media/cursorComida.png"), auto';
+    }
+})
 
 // Musica
 function r1() {
