@@ -4,6 +4,7 @@ let superviviente = document.querySelector('.superviviente');
 let pantallaX = window.innerWidth;
 let pantallaY = window.innerHeight;
 
+/* ¡¡¡¡¡¡¡¡¡VARIABLE TEMPORANEA (QUITARLA CUANDO TENEMOS MECANICA DE MOVIMIENTO HELICOPTERO)!!!!!!!! */
 let helicopteroActivo = true;
 
 
@@ -64,30 +65,31 @@ function pintarComidas(contenedorComida){
 function recoleccionComida(supervivienteSeleccionado){
     supervivienteSeleccionadoY = parseFloat(supervivienteSeleccionado.style.top);
     supervivienteSeleccionadoX = parseFloat(supervivienteSeleccionado.style.left);
+
     supervivienteSeleccionado.style.animation = 'none';
     void supervivienteSeleccionado.offsetWidth;
+
     let closestComidaCoords = [];
     let closestComida = 0;
+
     if (helicopteroActivo && arrayComida.length > 0){
         for (let i=0; i<arrayComida.length; i++){
             let distance = Math.sqrt(Math.pow(arrayComida[i].x - supervivienteSeleccionadoX, 2) + Math.pow(arrayComida[i].y - supervivienteSeleccionadoY, 2));
-            if (i == 0) {
+            if (i == 0 || distance < closestComida) {
+                closestComidaCoords = { x: arrayComida[i].x, y: arrayComida[i].y };
                 closestComida = distance;
-                closestComidaCoords.push(arrayComida[i])
-            } else {
-                if (distance < closestComida) {
-                    closestComidaCoords.splice(0, 1, arrayComida[i]);
-                    closestComida = distance;
-                }
             }
         }
-        supervivienteSeleccionado.style.setProperty('--endY', `${closestComidaCoords[0].y}px`);
-        supervivienteSeleccionado.style.setProperty('--endX', `${closestComidaCoords[0].x}px`);
-        supervivienteSeleccionado.style.animation = 'comida 1.5s ease-out 2 alternate';
+        supervivienteSeleccionado.style.setProperty('--startX', `${supervivienteSeleccionadoX}px`);
+        supervivienteSeleccionado.style.setProperty('--startY', `${supervivienteSeleccionadoY}px`);
+        supervivienteSeleccionado.style.setProperty('--endX', `${closestComidaCoords.x}px`);
+        supervivienteSeleccionado.style.setProperty('--endY', `${closestComidaCoords.y}px`);
+        supervivienteSeleccionado.style.animation = 'comida 5s ease-out';
         for (let i=0; i<arrayComida.length; i++){
-            if (arrayComida[i].x == closestComidaCoords[0].x && arrayComida[i].y == closestComidaCoords[0].y){
+            if (arrayComida[i].x == closestComidaCoords.x && arrayComida[i].y == closestComidaCoords.y){
                 arrayComida.splice(i, 1);
                 desaparicionComida(`comida_${i}`);
+                break;
             }
         }
     }
@@ -95,8 +97,8 @@ function recoleccionComida(supervivienteSeleccionado){
 
 function desaparicionComida(idComida){
     let comida = document.getElementById(idComida);
-    comida.style.animation = 'desaparicion 0.5s 1.5s ease-out forwards';
-    setTimeout(pintarComidas, 2000, contenedorPrincipal)
+    comida.style.animation = 'desaparicion 0.5s 3s ease-out forwards';
+    setTimeout(pintarComidas, 4000, contenedorPrincipal)
 }
 
 // Musica
@@ -119,8 +121,8 @@ function mute(){
     audio.pause();
 }
 function coordenadasAleatoriasSupervivientes() {
-    let coordRandomX = Math.round(Math.random()* pantallaX - superviviente.offsetWidth);
-    let coordRandomY = Math.round(Math.random()* pantallaY - superviviente.offsetHeight);
+    let coordRandomX = Math.round(Math.random()* (pantallaX - superviviente.offsetWidth));
+    let coordRandomY = Math.round(Math.random()* (pantallaY - superviviente.offsetHeight));
     coordenadasAleatorias = [coordRandomX, coordRandomY];
 }
 
