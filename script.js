@@ -44,7 +44,22 @@ function pintarComidas(contenedorComida){
 
 // Aparición aleatoria de supervivientes.
 
-function aleatorio() {
+function coordenadasAleatoriasSupervivientes() {
+    let coordenadasAleatorias = [];
     let coordRandomX = Math.round(Math.random()* window.innerWidth);
     let coordRandomY = Math.round(Math.random()* window.innerHeight);
+
+    coordenadasAleatorias = [coordRandomX, coordRandomY];
+
+    return coordenadasAleatorias;
 }
+
+function posicionarSupervivientes(supervivientes) {
+    for (let i = 0; i < supervivientes.length; i++) {
+        let coordenadas = coordenadasAleatoriasSupervivientes(); 
+        supervivientes[i].style.left = coordenadas[0] + 'px';
+        supervivientes[i].style.top = coordenadas[1] + 'px';
+    }
+}
+
+
