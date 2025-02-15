@@ -6,6 +6,12 @@ let arrayComida = [
     {x: 0, y: 0}
 ];
 
+let superviviente = document.querySelector(".superviviente");
+let coordenadasAleatorias = [];
+let listaSupervivientes = document.getElementsByClassName("superviviente");
+posicionarSupervivientes(listaSupervivientes);
+
+
 let anchoComida = 50;
 let altComida = 50;
 
@@ -43,7 +49,6 @@ function pintarComidas(contenedorComida){
 }
 
 // Aparición aleatoria de supervivientes.
-
 function aleatorio() {
     let coordRandomX = Math.round(Math.random()* window.innerWidth);
     let coordRandomY = Math.round(Math.random()* window.innerHeight);
@@ -68,3 +73,18 @@ function r3() {
 function mute(){
     audio.pause();
 }
+function coordenadasAleatoriasSupervivientes() {
+    let coordRandomX = Math.round(Math.random()* window.innerWidth - superviviente.offsetWidth);
+    let coordRandomY = Math.round(Math.random()* window.innerHeight - superviviente.offsetHeight);
+    coordenadasAleatorias = [coordRandomX, coordRandomY];
+}
+
+function posicionarSupervivientes(supervivientes) {
+    for (let i = 0; i < supervivientes.length; i++) {
+        coordenadasAleatoriasSupervivientes();
+        let coordenadas = coordenadasAleatorias; 
+        supervivientes[i].style.left = coordenadas[0] + 'px';
+        supervivientes[i].style.top = coordenadas[1] + 'px';
+    }
+}
+
