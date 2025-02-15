@@ -48,3 +48,22 @@ function aleatorio() {
     let coordRandomX = Math.round(Math.random()* window.innerWidth);
     let coordRandomY = Math.round(Math.random()* window.innerHeight);
 }
+
+function r1() {
+    audio.pause();
+    audio.src = 'media/creedence.mp3';
+    audio.play();
+}
+function r2() {
+    audio.pause();
+    audio.src = 'media/wagner.mp3';
+    audio.play();
+}
+function r3() {
+    audio.pause();
+    audio.src = 'media/acdc.mp3';
+    audio.play();
+}
+function mute(){
+    audio.pause();
+}
