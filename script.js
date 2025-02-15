@@ -49,6 +49,7 @@ function aleatorio() {
     let coordRandomY = Math.round(Math.random()* window.innerHeight);
 }
 
+// Musica
 function r1() {
     audio.pause();
     audio.src = 'media/creedence.mp3';
