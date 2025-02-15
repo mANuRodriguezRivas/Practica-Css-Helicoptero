@@ -3,13 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Creepster&family=Danfo&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Michroma&family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Play:wght@400;700&family=Rubik+Wet+Paint&family=Sixtyfour+Convergence&family=Tiny5&display=swap" rel="stylesheet">
     <title>Helicóptero de rescate</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="contenedor-principal">
-        <div class="helicoptero" ></div>
-        <div class="subreviviente" onclick="recoleccionComida()"></div>
+    <div class="gameBg">
+        <div class="menu">                
+            <h2>OPCIONES</h2>
+            <div class="sonido">
+                <div class="botonesAudio">
+                    <button class="botonMusica" onclick="r1()">1</button>
+                    <button class="botonMusica" onclick="r2()">2</button>
+                    <button class="botonMusica" onclick="r3()">3</button>
+                </div>
+                <audio id="audio">
+                    <source  src="">
+                </audio>
+                <div class="botonesAudio">
+                    <button class="botonMusica" onclick="mute()">Mute</button>
+                </div>
+            </div>
+        </div>
+        <div class="baseH">
+            <img class="basePic" src="media/base.png" alt="">
+        </div>
+        <div class="heli">
+            <img class="heliPic" src="media/heli.gif" alt="">
+        </div>
+        <div class="superviviente" onclick="recoleccionComida(this)"></div>  
+        <div class="superviviente" onclick="recoleccionComida(this)"></div>  
+        <div class="superviviente" onclick="recoleccionComida(this)"></div>     
     </div>
 </body>
 <script src="script.js"></script>
