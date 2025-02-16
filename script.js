@@ -18,7 +18,8 @@ let arrayComida = [
 
 let anchoSuperviviente = 50;
 let altoSuperviviente = 50;
-let coordenadasAleatorias = [];
+let posicionesSupervivientes = [];
+
 
 let anchoComida = 50;
 let altComida = 50;
@@ -137,25 +138,54 @@ function mute() {
     audio.pause();
 }
 
-// Aparición aleatoria de supervivientes.
+// Aparición aleatoria de supervivientes sin colisiones.
+
 function coordenadasAleatoriasSupervivientes() {
-    let coordRandomX = Math.round(Math.random() * (pantallaX - anchoSuperviviente));
-    let coordRandomY = Math.round(Math.random() * (pantallaY - altoSuperviviente));
+    let coordRandomX, coordRandomY, overlap;
+
+    do {
+        coordRandomX = Math.round(Math.random() * (pantallaX - anchoSuperviviente));
+        coordRandomY = Math.round(Math.random() * (pantallaY - altoSuperviviente));
+        overlap = false;
+        for (let i = 0; i < posicionesSupervivientes.length; i++) {
+            let otroSupervivienteX = posicionesSupervivientes[i]['x'];
+            let otroSupervivienteY = posicionesSupervivientes[i]['y'];
+
+            if (Math.abs(coordRandomX - otroSupervivienteX) < anchoSuperviviente && Math.abs(coordRandomY - otroSupervivienteY) < altoSuperviviente) {
+            overlap = true; 
+            break;
+        }
+        }
+    } while (overlap); 
+
     return [coordRandomX, coordRandomY];
 }
 
-// Posiciona a los supervivientes en la pantalla
+
+// Posiciona a los supervivientes en la pantalla.
 function posicionarSupervivientes(supervivientes) {
+    posicionesSupervivientes = []; 
+
     for (let i = 0; i < supervivientes.length; i++) {
         let coordenadas = coordenadasAleatoriasSupervivientes();
+
+        posicionesSupervivientes[i] = [];
+        posicionesSupervivientes[i]['x'] = coordenadas[0];
+        posicionesSupervivientes[i]['y'] = coordenadas[1];
+
         supervivientes[i].style.left = coordenadas[0] + 'px';
         supervivientes[i].style.top = coordenadas[1] + 'px';
+
+        temporizadorVidaSuperviviente(supervivientes[i]);
     }
-    generaPosicionComida()
+
+    generaPosicionComida();
 }
 
 
-// Obtiene la lista de supervivientes y los posiciona cuando la página carga
+
+// Lista de supervivientes y los posiciona cuando la página carga
+
 window.onload = function() {
     let elementos = document.getElementsByClassName("superviviente");
     let listaSupervivientes = [];
@@ -166,5 +196,22 @@ window.onload = function() {
 
     posicionarSupervivientes(listaSupervivientes);
 };
+
+
+// Gestion del tiempo de vida
+
+function temporizadorVidaSuperviviente(superviviente) {
+    setTimeout(eliminarSuperviviente, 3000, superviviente); 
+    superviviente.style.animation = 'desaparicion 3s ease-out forwards';        // Cambiar tiempo de desaparicion.  ¿Desaparecen todos a la vez?
+}
+
+function eliminarSuperviviente(superviviente) {
+    if (superviviente) { 
+        superviviente.style.opacity = 1; 
+        superviviente.style.backgroundImage = "url('media/fallo.png')"; 
+    }
+}
+
+
 
 
