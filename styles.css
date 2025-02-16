@@ -141,6 +141,25 @@ button:hover:active{
 
     background-position: center;
     background-size: cover;
+<<<<<<< Updated upstream
+=======
+    filter: drop-shadow(1px 1px 3px  rgb(255, 255, 255));
+    animation-name: comidaMove;
+    animation-iteration-count: infinite;
+    animation-duration: 4s;
+
+}
+@keyframes comidaMove {
+    0%{
+    }
+    50%{
+        transform: rotate(25deg) scale(1.2);
+        filter: drop-shadow(1px 1px 3px  #fffb00);
+    }
+    100%{
+    }
+    
+>>>>>>> Stashed changes
 }
 
 @keyframes comida {
@@ -168,6 +187,12 @@ button:hover:active{
     }
     to{
         opacity: 0;
+<<<<<<< Updated upstream
+=======
+        transform: scale(3) rotate(40deg);
+        filter: drop-shadow(10px 10px 130px #ff0000);
+
+>>>>>>> Stashed changes
     }
 
 }

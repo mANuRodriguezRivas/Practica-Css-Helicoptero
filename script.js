@@ -158,7 +158,7 @@ function posicionarSupervivientes(supervivientes) {
 // Obtiene la lista de supervivientes y los posiciona cuando la página carga
 window.onload = function() {
     let elementos = document.getElementsByClassName("superviviente");
-    let listaSupervivientes = [];
+    let listaSupervivientes = [];f
 
     for (let i = 0; i < elementos.length; i++) {
         listaSupervivientes[i] = elementos[i];
@@ -167,4 +167,7 @@ window.onload = function() {
     posicionarSupervivientes(listaSupervivientes);
 };
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
