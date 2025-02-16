@@ -13,6 +13,9 @@
     box-sizing: border-box;
 }
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 body{
     font-family: "Tiny5", serif;
@@ -138,7 +141,10 @@ button:hover:active{
     transform: rotate(90deg);
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     filter: drop-shadow(8px -3px 3px  rgba(0, 0, 0, 0.555));
