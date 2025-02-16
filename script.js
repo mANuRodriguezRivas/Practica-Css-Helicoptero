@@ -201,9 +201,6 @@ window.onload = function() {
 
     posicionarSupervivientes(listaSupervivientes);
 };
-<<<<<<< Updated upstream
-=======
-
 
 // Gestion del tiempo de vida
 
@@ -232,4 +229,4 @@ function heliAnimacionDesact(){
 
     
 }
->>>>>>> Stashed changes
+
