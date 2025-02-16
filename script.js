@@ -200,25 +200,25 @@ window.onload = function() {
 
 // Gestión del tiempo de vida con contador
 function temporizadorVidaSuperviviente(superviviente) {
-    let contador = superviviente.querySelector(".contador"); // 🟢 Buscar su contador
+    let contador = superviviente.querySelector(".contador"); 
 
-    if (!contador) return; // ❌ Si no tiene contador, salir
+    if (!contador) return; 
 
-    let tiempoRestante = 20; // ⏳ Cada superviviente tiene 20 segundos
-    contador.innerText = tiempoRestante; // 🔢 Mostrar el tiempo inicial
+    let tiempoRestante = 20;
+    contador.innerText = tiempoRestante; 
 
     // Si ya tiene un temporizador activo, lo detenemos antes de crear uno nuevo
     if (superviviente.intervalo) {
         clearInterval(superviviente.intervalo);
     }
 
-    // ✅ Guardamos el nuevo temporizador en el superviviente
+    //  Guardamos el nuevo temporizador en el superviviente
     superviviente.intervalo = setInterval(function() {
         tiempoRestante--; 
-        contador.innerText = tiempoRestante; // 🔢 Actualizar el contador visual
+        contador.innerText = tiempoRestante; 
 
         if (tiempoRestante <= 0) {
-            clearInterval(superviviente.intervalo); // 🛑 Detener el contador
+            clearInterval(superviviente.intervalo);
             superviviente.style.animation = 'desaparicion 3s ease-out forwards'; 
 
             setTimeout(function() { eliminarSuperviviente(superviviente); }, 3000); 
@@ -228,8 +228,8 @@ function temporizadorVidaSuperviviente(superviviente) {
 
 // Función para reiniciar el contador cuando un superviviente recoge comida
 function reiniciarContador(superviviente) {
-    console.log("🔄 Reiniciando contador para", superviviente);
-    temporizadorVidaSuperviviente(superviviente); // 🔥 Reiniciamos el contador a 20
+    console.log(" Reiniciando contador para", superviviente);
+    temporizadorVidaSuperviviente(superviviente);
 }
 
 // Eliminar superviviente después de la animación
@@ -241,7 +241,7 @@ function eliminarSuperviviente(superviviente) {
 
 // Función que se llama cuando un superviviente recoge comida
 function recogerComida(superviviente) {
-    console.log("🍏 Superviviente ha recogido comida:", superviviente);
-    reiniciarContador(superviviente); // ✅ Reiniciamos el contador a 20
+    console.log("Superviviente ha recogido comida:", superviviente);
+    reiniciarContador(superviviente); 
     recogerComida(superviviente);
 }
