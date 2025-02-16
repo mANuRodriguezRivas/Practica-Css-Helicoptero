@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 let contenedorPrincipal = document.querySelector('.gameBg');
 let listaSupervivientes = document.getElementsByClassName("superviviente");
 let superviviente = document.querySelector('.superviviente');
@@ -10,7 +8,6 @@ let pantallaY = window.innerHeight;
 let helicopteroActivo = true;
 
 
->>>>>>> Stashed changes
 let arrayComida = [
     {x: 0, y: 0},
     {x: 0, y: 0},
@@ -19,29 +16,29 @@ let arrayComida = [
     {x: 0, y: 0}
 ];
 
+let anchoSuperviviente = 50;
+let altoSuperviviente = 50;
+let coordenadasAleatorias = [];
+
 let anchoComida = 50;
 let altComida = 50;
 
-<<<<<<< Updated upstream
-//Genera posición aleatoria para las comida sin que se sobrelapan
-function generaPosicionComida(contenedorComidaX, contenedorComidaY){
-=======
 posicionarSupervivientes(listaSupervivientes);
 
 
 //Genera posición aleatoria para las comida sin que se solapen
 function generaPosicionComida(){
->>>>>>> Stashed changes
     for (let i=0; i<arrayComida.length; i++){
         let randomX;
         let randomY;
         let overlap;
         do{
-            randomX = Math.random() * (contenedorComidaX - anchoComida);
-            randomY = Math.random() * (contenedorComidaY - altComida);
+            randomX = Math.random() * (pantallaX - anchoComida);
+            randomY = Math.random() * (pantallaY - altComida);
+
             overlap = false;
-            for (let j=0; j<i; j++) {
-                if (Math.abs(randomX - arrayComida[j].x) < anchoComida && Math.abs(randomY - arrayComida[j].y) < altComida){
+            for (let j = 0; j < i; j++) {
+                if (Math.abs(randomX - arrayComida[j].x) < anchoComida && Math.abs(randomY - arrayComida[j].y) < altComida) {
                     overlap = true;
                     break;
                 }
@@ -50,25 +47,72 @@ function generaPosicionComida(){
         arrayComida[i].x = randomX;
         arrayComida[i].y = randomY;
     }
-    pintarComidas();
+    pintarComidas(contenedorPrincipal);
 }
+
 // Pinta las comidas
 function pintarComidas(contenedorComida){
+    let comidas = document.querySelectorAll('.comida');
+    for (let i=0; i<comidas.length; i++){
+        comidas[i].remove();
+    }
     for (let i=0; i<arrayComida.length; i++){
+
         let divComida = document.createElement('div');
         divComida.classList.add('comida');
         divComida.style.top = arrayComida[i].y + 'px';
         divComida.style.left = arrayComida[i].x + 'px';
+        divComida.id = `comida_${i}`;
         contenedorComida.appendChild(divComida);
     }
 }
 
-// Aparición aleatoria de supervivientes.
+//Recolección comida
+function recoleccionComida(supervivienteSeleccionado){
+    supervivienteSeleccionadoY = parseFloat(supervivienteSeleccionado.style.top);
+    supervivienteSeleccionadoX = parseFloat(supervivienteSeleccionado.style.left);
 
-function aleatorio() {
-    let coordRandomX = Math.round(Math.random()* window.innerWidth);
-    let coordRandomY = Math.round(Math.random()* window.innerHeight);
+    supervivienteSeleccionado.style.animation = 'none';
+    void supervivienteSeleccionado.offsetWidth;
+
+    let closestComidaCoords = [];
+    let closestComida = 0;
+
+    if (helicopteroActivo && arrayComida.length > 0){
+        for (let i=0; i<arrayComida.length; i++){
+            let distance = Math.sqrt(Math.pow(arrayComida[i].x - supervivienteSeleccionadoX, 2) + Math.pow(arrayComida[i].y - supervivienteSeleccionadoY, 2));
+            if (i == 0 || distance < closestComida) {
+                closestComidaCoords = { x: arrayComida[i].x, y: arrayComida[i].y };
+                closestComida = distance;
+            }
+        }
+        supervivienteSeleccionado.style.setProperty('--startX', `${supervivienteSeleccionadoX}px`);
+        supervivienteSeleccionado.style.setProperty('--startY', `${supervivienteSeleccionadoY}px`);
+        supervivienteSeleccionado.style.setProperty('--endX', `${closestComidaCoords.x}px`);
+        supervivienteSeleccionado.style.setProperty('--endY', `${closestComidaCoords.y}px`);
+        supervivienteSeleccionado.style.animation = 'comida 5s ease-out';
+        for (let i=0; i<arrayComida.length; i++){
+            if (arrayComida[i].x == closestComidaCoords.x && arrayComida[i].y == closestComidaCoords.y){
+                arrayComida.splice(i, 1);
+                desaparicionComida(`comida_${i}`);
+                break;
+            }
+        }
+    }
 }
+
+function desaparicionComida(idComida){
+    let comida = document.getElementById(idComida);
+    comida.style.animation = 'desaparicion 0.5s 3s ease-out forwards';
+    setTimeout(pintarComidas, 4000, contenedorPrincipal)
+
+}
+// Cambio cursor cuando hover sobre superviviente (si helicoptero es activo)
+document.addEventListener('mouseover', function(e){
+    if (e.target.classList.contains('superviviente') && helicopteroActivo){
+        e.target.style.cursor = 'url("media/cursorComida.png"), auto';
+    }
+})
 
 // Musica
 function r1() {
@@ -76,21 +120,21 @@ function r1() {
     audio.src = 'media/creedence.mp3';
     audio.play();
 }
+
 function r2() {
     audio.pause();
     audio.src = 'media/wagner.mp3';
     audio.play();
 }
+
 function r3() {
     audio.pause();
     audio.src = 'media/acdc.mp3';
     audio.play();
 }
-function mute(){
+
+function mute() {
     audio.pause();
-<<<<<<< Updated upstream
-}
-=======
 }
 
 // Aparición aleatoria de supervivientes.
@@ -123,120 +167,38 @@ window.onload = function() {
     posicionarSupervivientes(listaSupervivientes);
 };
 
-function rescatarSuperviviente(superviviente) {
-    if (!helicopteroActivo) return;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
-=======
+function rescatarSuperviviente(supervivienteSeleccionado) {
+    if (helicopteroActivo) {
+        recoleccionComida(supervivienteSeleccionado); // Si está activo, sigue con la lógica de comida
+        return;
+    }
 
     let heli = document.querySelector('.heli');
-    let heliPic = document.querySelector('.heliPic');
+    let heliX = heli.offsetLeft;
+    let heliY = heli.offsetTop;
+    let supX = supervivienteSeleccionado.offsetLeft;
+    let supY = supervivienteSeleccionado.offsetTop;
 
-    let heliX = heli.getBoundingClientRect().left;
-    let heliY = heli.getBoundingClientRect().top;
-    let supX = superviviente.getBoundingClientRect().left;
-    let supY = superviviente.getBoundingClientRect().top;
+    // Desactivar interacción mientras el helicóptero está en movimiento
+    helicopteroActivo = true;
 
-    // Mover el helicóptero al superviviente
+    // Mover el helicóptero hasta el superviviente con animación
     heli.style.transition = 'top 2s linear, left 2s linear';
     heli.style.left = supX + 'px';
     heli.style.top = supY + 'px';
 
     setTimeout(() => {
-        // Ocultar al superviviente (simular que subió)
-        superviviente.style.transition = 'opacity 0.5s';
-        superviviente.style.opacity = 0;
+        // Ocultar al superviviente (simulando que fue rescatado)
+        supervivienteSeleccionado.style.opacity = 0;
 
         setTimeout(() => {
             // Regresar el helicóptero a la base
             heli.style.left = heliX + 'px';
             heli.style.top = heliY + 'px';
+
+            setTimeout(() => {
+                helicopteroActivo = false; // Reactivar el helicóptero después del rescate
+            }, 2000);
         }, 2000);
     }, 2000);
 }
->>>>>>> Stashed changes
-
-    let heli = document.querySelector('.heli');
-    let heliPic = document.querySelector('.heliPic');
-
-    let heliX = heli.getBoundingClientRect().left;
-    let heliY = heli.getBoundingClientRect().top;
-    let supX = superviviente.getBoundingClientRect().left;
-    let supY = superviviente.getBoundingClientRect().top;
-
-    // Mover el helicóptero al superviviente
-    heli.style.transition = 'top 2s linear, left 2s linear';
-    heli.style.left = supX + 'px';
-    heli.style.top = supY + 'px';
-
-    setTimeout(() => {
-        // Ocultar al superviviente (simular que subió)
-        superviviente.style.transition = 'opacity 0.5s';
-        superviviente.style.opacity = 0;
-
-        setTimeout(() => {
-            // Regresar el helicóptero a la base
-            heli.style.left = heliX + 'px';
-            heli.style.top = heliY + 'px';
-        }, 2000);
-    }, 2000);
-}
->>>>>>> Stashed changes
-
-    let heli = document.querySelector('.heli');
-    let heliPic = document.querySelector('.heliPic');
-
-    let heliX = heli.getBoundingClientRect().left;
-    let heliY = heli.getBoundingClientRect().top;
-    let supX = superviviente.getBoundingClientRect().left;
-    let supY = superviviente.getBoundingClientRect().top;
-
-    // Mover el helicóptero al superviviente
-    heli.style.transition = 'top 2s linear, left 2s linear';
-    heli.style.left = supX + 'px';
-    heli.style.top = supY + 'px';
-
-    setTimeout(() => {
-        // Ocultar al superviviente (simular que subió)
-        superviviente.style.transition = 'opacity 0.5s';
-        superviviente.style.opacity = 0;
-
-        setTimeout(() => {
-            // Regresar el helicóptero a la base
-            heli.style.left = heliX + 'px';
-            heli.style.top = heliY + 'px';
-        }, 2000);
-    }, 2000);
-}
->>>>>>> Stashed changes
-
-    let heli = document.querySelector('.heli');
-    let heliPic = document.querySelector('.heliPic');
-
-    let heliX = heli.getBoundingClientRect().left;
-    let heliY = heli.getBoundingClientRect().top;
-    let supX = superviviente.getBoundingClientRect().left;
-    let supY = superviviente.getBoundingClientRect().top;
-
-    // Mover el helicóptero al superviviente
-    heli.style.transition = 'top 2s linear, left 2s linear';
-    heli.style.left = supX + 'px';
-    heli.style.top = supY + 'px';
-
-    setTimeout(() => {
-        // Ocultar al superviviente (simular que subió)
-        superviviente.style.transition = 'opacity 0.5s';
-        superviviente.style.opacity = 0;
-
-        setTimeout(() => {
-            // Regresar el helicóptero a la base
-            heli.style.left = heliX + 'px';
-            heli.style.top = heliY + 'px';
-        }, 2000);
-    }, 2000);
-}
-
->>>>>>> Stashed changes

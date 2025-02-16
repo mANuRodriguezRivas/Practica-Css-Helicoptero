@@ -1,25 +1,9 @@
 *{
-<<<<<<< Updated upstream
-    margin: 0px;
-    padding: 0px;
-}
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
-=======
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 body{
     font-family: "Tiny5", serif;
     font-weight: 200;
@@ -121,6 +105,7 @@ button:hover:active{
     display: flex;
     flex-direction: column;
     align-items: center;
+    filter: drop-shadow(8px 8px 5px  rgba(0, 0, 0, 0.521));
 }
 
 .heli{
@@ -133,6 +118,7 @@ button:hover:active{
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 10px;
+    
 }
 
 .basePic{
@@ -142,35 +128,35 @@ button:hover:active{
 .heliPic{
     height: 100px;
     transform: rotate(90deg);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-    filter: drop-shadow(8px -3px 3px  rgba(0, 0, 0, 0.555));
+    filter: drop-shadow(5px -2px 1px  rgba(0, 0, 0, 0.555));
+    animation-name: heliPicA;
+    animation-timing-function: ease-in-out;
+    animation-duration: 4s;
+}
+.heliPic2{
+    height: 100px;
+    transform: rotate(90deg);
+    filter: drop-shadow(5px -2px 1px  rgba(0, 0, 0, 0.555));
+    animation-name: heliPicA;
+    animation-timing-function: ease-in-out;
+    animation-duration: 4s;
 }
 
-@keyframes heliPic {
+@keyframes heliPicA {
     0%{
-        filter: drop-shadow(8px -3px 3px  rgba(0, 0, 0, 0.555));
+        filter: drop-shadow(8px -2px 1px  rgba(0, 0, 0, 0.555));
         height: 100px;
     }
     10%{
-        filter: drop-shadow(50px -3px 3px  rgba(0, 0, 0, 0.555));
-        height: 140px;
+        filter: drop-shadow(50px -13px 8px  rgba(0, 0, 0, 0.555));
+        height: 130px;
     }
     90%{
-        filter: drop-shadow(50px -3px 3px  rgba(0, 0, 0, 0.555));
-        height: 140px;
+        filter: drop-shadow(50px -13px 8px  rgba(0, 0, 0, 0.555));
+        height: 130px;
     }
     100%{
-        filter: drop-shadow(8px -3px 3px  rgba(0, 0, 0, 0.555));
+        filter: drop-shadow(8px -2px 1px  rgba(0, 0, 0, 0.555));
         height: 100px;
     }
 }
@@ -194,7 +180,7 @@ button:hover:active{
     background-image: url(media/pizza.png);
     background-position: center;
     background-size: cover;
-    filter: drop-shadow(1px 1px 5px  rgb(255, 255, 255));
+    filter: drop-shadow(1px 1px 3px  rgb(255, 255, 255));
 }
 
 @keyframes comida {
@@ -217,12 +203,24 @@ button:hover:active{
 }
 
 @keyframes desaparicion {
-    from{
+    0%{
         opacity: 1;
+        transform: scale(1);
     }
-    to{
+    30%{
+        opacity: 1;
+        transform: scale(1);
+    }
+    51%{
+        opacity: 1;
+        transform: scale(0.3) rotate(0deg);
+        filter: drop-shadow(1px 1px 3px  #ff0000);
+    }
+    100%{
         opacity: 0;
+        transform: scale(2) rotate(40deg);
+        filter: drop-shadow(10px 10px 130px #ff0000);
+
     }
 
->>>>>>> Stashed changes
 }
