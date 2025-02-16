@@ -145,6 +145,8 @@ function desaparicionComida(idComida){
 document.addEventListener('mouseover', function(e){
     if (e.target.classList.contains('superviviente') && helicopteroActivo){
         e.target.style.cursor = 'url("media/cursorComida.png"), auto';
+    } else if (e.target.classList.contains('superviviente') && !helicopteroActivo) {
+        e.target.style.cursor = 'pointer';
     }
 });
 
@@ -209,7 +211,7 @@ function posicionarSupervivientes(supervivientes) {
         supervivientes[i].style.left = coordenadas[0] + 'px';
         supervivientes[i].style.top = coordenadas[1] + 'px';
 
-        temporizadorVidaSuperviviente(supervivientes[i]);
+        //temporizadorVidaSuperviviente(supervivientes[i]);
     }
     generaPosicionComida();
 }
@@ -230,14 +232,14 @@ window.onload = function() {
 
 // Gestion del tiempo de vida
 
-function temporizadorVidaSuperviviente(superviviente) {
-    setTimeout(eliminarSuperviviente, 3000, superviviente); 
-    superviviente.style.animation = 'desaparicion 3s ease-out forwards';        // Cambiar tiempo de desaparicion.  ¿Desaparecen todos a la vez?
-}
+// function temporizadorVidaSuperviviente(superviviente) {
+//     setTimeout(eliminarSuperviviente, 3000, superviviente); 
+//     superviviente.style.animation = 'desaparicion 3s ease-out forwards';        // Cambiar tiempo de desaparicion.  ¿Desaparecen todos a la vez?
+// }
 
-function eliminarSuperviviente(superviviente) {
-    if (superviviente) { 
-        superviviente.style.opacity = 1; 
-        superviviente.style.backgroundImage = "url('media/fallo.png')"; 
-    }
-}
+// function eliminarSuperviviente(superviviente) {
+//     if (superviviente) { 
+//         superviviente.style.opacity = 1; 
+//         superviviente.style.backgroundImage = "url('media/fallo.png')"; 
+//     }
+// }
