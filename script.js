@@ -130,9 +130,11 @@ function rescatarSuperviviente(supervivienteSeleccionado) {
 
             setTimeout(() => {
                 helicopteroActivo = false; // Reactivar el helicóptero después del rescate
-            }, 1000);
-        }, 1000); //tiempo de espera
+            }, 6000); // Tiempo de espera para activar el heli de nuevo
+        }, 1000); //tiempo de espera en el sitio del superviviente
     }, 6000); //tiempo de visualización del superviviente
+    heliAnimacion();
+    
 }
 
 function desaparicionComida(idComida){
@@ -199,3 +201,35 @@ window.onload = function() {
 
     posicionarSupervivientes(listaSupervivientes);
 };
+<<<<<<< Updated upstream
+=======
+
+
+// Gestion del tiempo de vida
+
+// function temporizadorVidaSuperviviente(superviviente) {
+//     setTimeout(eliminarSuperviviente, 3000, superviviente); 
+//     superviviente.style.animation = 'desaparicion 3s ease-out forwards';        // Cambiar tiempo de desaparicion.  ¿Desaparecen todos a la vez?
+// }
+
+// function eliminarSuperviviente(superviviente) {
+//     if (superviviente) { 
+//         superviviente.style.opacity = 1; 
+//         superviviente.style.backgroundImage = "url('media/fallo.png')"; 
+//     }
+// }
+
+
+//Añadir clase de helicoptero Animado
+function heliAnimacion(){
+    let vuelo = document.getElementById('heliFoto');
+    vuelo.classList.add('heliPic2');
+}
+
+function heliAnimacionDesact(){
+    let vuelo = document.getElementById('heliFoto');
+    vuelo.classList.add('heliPic');
+
+    
+}
+>>>>>>> Stashed changes
