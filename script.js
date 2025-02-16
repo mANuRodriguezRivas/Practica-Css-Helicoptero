@@ -13,6 +13,7 @@ let arrayComida = [
     {x: 0, y: 0}
 ];
 
+
 let anchoSuperviviente = 50;
 let altoSuperviviente = 50;
 let posicionesSupervivientes = [];
@@ -174,7 +175,6 @@ function mute() {
 }
 
 // Aparición aleatoria de supervivientes sin colisiones.
-
 function coordenadasAleatoriasSupervivientes() {
     let coordRandomX, coordRandomY, overlap;
 
@@ -187,15 +187,14 @@ function coordenadasAleatoriasSupervivientes() {
             let otroSupervivienteY = posicionesSupervivientes[i]['y'];
 
             if (Math.abs(coordRandomX - otroSupervivienteX) < anchoSuperviviente && Math.abs(coordRandomY - otroSupervivienteY) < altoSuperviviente) {
-            overlap = true; 
-            break;
-        }
+                overlap = true; 
+                break;
+            }
         }
     } while (overlap); 
 
     return [coordRandomX, coordRandomY];
 }
-
 
 // Posiciona a los supervivientes en la pantalla.
 function posicionarSupervivientes(supervivientes) {
@@ -211,13 +210,18 @@ function posicionarSupervivientes(supervivientes) {
         supervivientes[i].style.left = coordenadas[0] + 'px';
         supervivientes[i].style.top = coordenadas[1] + 'px';
 
+
+        let contador = document.createElement("div");
+        contador.classList.add("contador");
+        supervivientes[i].appendChild(contador);
+
+
         //temporizadorVidaSuperviviente(supervivientes[i]);
     }
     generaPosicionComida();
 }
 
 // Lista de supervivientes y los posiciona cuando la página carga
-
 window.onload = function() {
     let elementos = document.getElementsByClassName("superviviente");
     let listaSupervivientes = [];
@@ -229,17 +233,64 @@ window.onload = function() {
     posicionarSupervivientes(listaSupervivientes);
 };
 
+// Gestión del tiempo de vida con contador
+function temporizadorVidaSuperviviente(superviviente) {
+    let contador = superviviente.querySelector(".contador"); 
 
-// Gestion del tiempo de vida
+    if (!contador) return; 
 
-// function temporizadorVidaSuperviviente(superviviente) {
-//     setTimeout(eliminarSuperviviente, 3000, superviviente); 
-//     superviviente.style.animation = 'desaparicion 3s ease-out forwards';        // Cambiar tiempo de desaparicion.  ¿Desaparecen todos a la vez?
-// }
 
-// function eliminarSuperviviente(superviviente) {
-//     if (superviviente) { 
-//         superviviente.style.opacity = 1; 
-//         superviviente.style.backgroundImage = "url('media/fallo.png')"; 
-//     }
-// }
+    let tiempoRestante = 20;
+    contador.innerText = tiempoRestante; 
+
+    // Si ya tiene un temporizador activo, lo detenemos antes de crear uno nuevo
+    if (superviviente.intervalo) {
+        clearInterval(superviviente.intervalo);
+    }
+
+    //  Guardamos el nuevo temporizador en el superviviente
+    superviviente.intervalo = setInterval(function() {
+        tiempoRestante--; 
+        contador.innerText = tiempoRestante; 
+
+        if (tiempoRestante <= 0) {
+            clearInterval(superviviente.intervalo);
+            superviviente.style.animation = 'desaparicion 3s ease-out forwards'; 
+
+            setTimeout(function() { eliminarSuperviviente(superviviente); }, 3000); 
+        }
+    }, 1000);
+}
+
+// Función para reiniciar el contador cuando un superviviente recoge comida
+function reiniciarContador(superviviente) {
+    console.log(" Reiniciando contador para", superviviente);
+    temporizadorVidaSuperviviente(superviviente);
+}
+
+// Eliminar superviviente después de la animación
+function eliminarSuperviviente(superviviente) {
+    if (superviviente) { 
+        superviviente.style.display = "none"; 
+    }
+}
+
+// Función que se llama cuando un superviviente recoge comida
+function recogerComida(superviviente) {
+    console.log("Superviviente ha recogido comida:", superviviente);
+    reiniciarContador(superviviente); 
+    recogerComida(superviviente);
+}
+
+function temporizadorVidaSuperviviente(superviviente) {
+     setTimeout(eliminarSuperviviente, 3000, superviviente); 
+     superviviente.style.animation = 'desaparicion 3s ease-out forwards';        // Cambiar tiempo de desaparicion.  ¿Desaparecen todos a la vez?
+}
+
+function eliminarSuperviviente(superviviente) {
+     if (superviviente) { 
+        superviviente.style.opacity = 1; 
+         superviviente.style.backgroundImage = "url('media/fallo.png')"; 
+   }
+}
+
