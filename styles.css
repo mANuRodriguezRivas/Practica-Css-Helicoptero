@@ -4,15 +4,6 @@
     box-sizing: border-box;
 }
 
-.comida{
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background-image: url(media/pizza.png);
-    background-position: center;
-    background-size: cover;
-}
-
 body{
     font-family: "Tiny5", serif;
     font-weight: 200;
@@ -45,17 +36,20 @@ h2{
     backdrop-filter: blur(2px);
     z-index: 10;
 }
+
 .menu:hover{
     transition-delay:0.1s;
     background-color: rgba(121, 121, 121, 0.221);
     backdrop-filter: blur(6px);
     transform: translateY(-130px);
 }
+
 .sonido{
     display: flex;
     align-items: flex-start;
     flex-direction: column;
 }
+
 button{
     transition: 0.13s ease;
     background-color: #ff9100; 
@@ -70,12 +64,14 @@ button{
     margin-right: 15px;
     margin-top: 20px;
 }
+
 button:hover{ 
     color: #ffffff; 
     background-color: rgb(102, 102, 102);  
     cursor: pointer;
     border-color: #ffffff;
 } 
+
 button:hover:active{  
     background-color: #1d9100c9;  
     color: #ffffff; 
@@ -83,14 +79,17 @@ button:hover:active{
     transform: scale(0.95);
     box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.457);
 }
+
 .botonMusica{
     border-radius: 0.5em;
 }
+
 .botonesAudio{
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .sonido{
     display: flex;
     align-items: start;
@@ -106,27 +105,55 @@ button:hover:active{
     display: flex;
     flex-direction: column;
     align-items: center;
+    filter: drop-shadow(8px 8px 5px  rgba(0, 0, 0, 0.521));
 }
 
-.heli{
+.heli {
     z-index: 2;
     position: absolute; 
     top: 50%; 
-    right: 0; 
-    transform: translateY(-50%); 
+    left: 90%;
+    transform: translate(-50%, -50%);
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
 }
 
 .basePic{
-    height: 200px;
+    height: 220px;
 }
 
 .heliPic{
-    height: 120px;
+    height: 100px;
     transform: rotate(90deg);
+    filter: drop-shadow(5px -2px 1px  rgba(0, 0, 0, 0.555));
+}
+.heliPic2{
+    height: 100px;
+    transform: rotate(90deg);
+    filter: drop-shadow(5px -2px 1px  rgba(0, 0, 0, 0.555));
+    animation-name: heliPicA;
+    animation-timing-function: ease-in-out;
+    animation-duration: 4s;
+}
+
+@keyframes heliPicA {
+    0%{
+        filter: drop-shadow(8px -2px 1px  rgba(0, 0, 0, 0.555));
+        height: 100px;
+    }
+    10%{
+        filter: drop-shadow(50px -13px 8px  rgba(0, 0, 0, 0.555));
+        height: 130px;
+    }
+    90%{
+        filter: drop-shadow(50px -13px 8px  rgba(0, 0, 0, 0.555));
+        height: 130px;
+    }
+    100%{
+        filter: drop-shadow(8px -2px 1px  rgba(0, 0, 0, 0.555));
+        height: 100px;
+    }
 }
 
 .superviviente {
@@ -134,12 +161,36 @@ button:hover:active{
     width: 50px;
     height: 50px;
     background-image: url(media/survivor.gif);
-
     background-size: cover;
     background-position: center;
-
     background-position: center;
     background-size: cover;
+    filter: drop-shadow(5px 5px 3px  rgba(10, 10, 10, 0.349));
+}
+
+.comida{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url(media/pizza.png);
+    background-position: center;
+    background-size: cover;
+    filter: drop-shadow(1px 1px 3px  rgb(255, 255, 255));
+    animation-name: comidaMove;
+    animation-iteration-count: infinite;
+    animation-duration: 4s;
+
+}
+@keyframes comidaMove {
+    0%{
+    }
+    50%{
+        transform: rotate(25deg) scale(1.2);
+        filter: drop-shadow(1px 1px 3px  #fffb00);
+    }
+    100%{
+    }
+    
 }
 
 @keyframes comida {
@@ -162,11 +213,24 @@ button:hover:active{
 }
 
 @keyframes desaparicion {
-    from{
+    0%{
         opacity: 1;
+        transform: scale(1);
     }
-    to{
+    30%{
+        opacity: 1;
+        transform: scale(1);
+    }
+    51%{
+        opacity: 1;
+        transform: scale(0.3) rotate(0deg);
+        filter: drop-shadow(1px 1px 3px  #ff0000);
+    }
+    100%{
         opacity: 0;
+        transform: scale(3) rotate(40deg);
+        filter: drop-shadow(10px 10px 130px #ff0000);
+
     }
 
 }
