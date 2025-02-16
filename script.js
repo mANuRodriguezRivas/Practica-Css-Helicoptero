@@ -16,29 +16,16 @@ let arrayComida = [
     {x: 0, y: 0}
 ];
 
-
 let anchoSuperviviente = 50;
 let altoSuperviviente = 50;
 let coordenadasAleatorias = [];
 
-
 let anchoComida = 50;
 let altComida = 50;
-let supervivienteX = 0;
-let supervivienteY = 0;
-let coordenadasAleatorias = [];
 
 posicionarSupervivientes(listaSupervivientes);
 
 
-// Genera posición aleatoria para las comida sin que se sobrelapan
-function generaPosicionComida(contenedorComidaX, contenedorComidaY) {
-    for (let i = 0; i < arrayComida.length; i++) {
-        let randomX, randomY, overlap;
-        do {
-            randomX = Math.random() * (contenedorComidaX - anchoComida);
-            randomY = Math.random() * (contenedorComidaY - altComida);
-=======
 //Genera posición aleatoria para las comida sin que se sobrelapan
 function generaPosicionComida(){
     for (let i=0; i<arrayComida.length; i++){
@@ -64,10 +51,6 @@ function generaPosicionComida(){
 }
 
 // Pinta las comidas
-
-function pintarComidas(contenedorComida) {
-    for (let i = 0; i < arrayComida.length; i++) {
-
 function pintarComidas(contenedorComida){
     let comidas = document.querySelectorAll('.comida');
     for (let i=0; i<comidas.length; i++){
@@ -83,12 +66,6 @@ function pintarComidas(contenedorComida){
         contenedorComida.appendChild(divComida);
     }
 }
-
-
-// Aparición aleatoria de supervivientes.
-function aleatorio() {
-    let coordRandomX = Math.round(Math.random() * window.innerWidth);
-    let coordRandomY = Math.round(Math.random() * window.innerHeight);
 
 //Recolección comida
 function recoleccionComida(supervivienteSeleccionado){
@@ -162,15 +139,9 @@ function mute() {
 
 // Aparición aleatoria de supervivientes.
 function coordenadasAleatoriasSupervivientes() {
-
-    let coordRandomX = Math.round(Math.random() * (window.innerWidth - anchoSuperviviente));
-    let coordRandomY = Math.round(Math.random() * (window.innerHeight - altoSuperviviente));
+    let coordRandomX = Math.round(Math.random() * (pantallaX - anchoSuperviviente));
+    let coordRandomY = Math.round(Math.random() * (pantallaY - altoSuperviviente));
     return [coordRandomX, coordRandomY];
-
-    let coordRandomX = Math.round(Math.random()* (pantallaX - superviviente.offsetWidth));
-    let coordRandomY = Math.round(Math.random()* (pantallaY - superviviente.offsetHeight));
-    coordenadasAleatorias = [coordRandomX, coordRandomY];
-
 }
 
 // Posiciona a los supervivientes en la pantalla
