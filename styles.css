@@ -1,9 +1,17 @@
 *{
+<<<<<<< Updated upstream
     margin: 0px;
     padding: 0px;
 }
 <<<<<<< Updated upstream
 =======
+
+>>>>>>> Stashed changes
+=======
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 >>>>>>> Stashed changes
 body{
@@ -129,7 +137,10 @@ button:hover:active{
     height: 100px;
     transform: rotate(90deg);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
     filter: drop-shadow(8px -3px 3px  rgba(0, 0, 0, 0.555));
 }
 

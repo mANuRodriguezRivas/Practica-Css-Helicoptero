@@ -125,6 +125,35 @@ window.onload = function() {
 
 function rescatarSuperviviente(superviviente) {
     if (!helicopteroActivo) return;
+<<<<<<< Updated upstream
+=======
+
+    let heli = document.querySelector('.heli');
+    let heliPic = document.querySelector('.heliPic');
+
+    let heliX = heli.getBoundingClientRect().left;
+    let heliY = heli.getBoundingClientRect().top;
+    let supX = superviviente.getBoundingClientRect().left;
+    let supY = superviviente.getBoundingClientRect().top;
+
+    // Mover el helicóptero al superviviente
+    heli.style.transition = 'top 2s linear, left 2s linear';
+    heli.style.left = supX + 'px';
+    heli.style.top = supY + 'px';
+
+    setTimeout(() => {
+        // Ocultar al superviviente (simular que subió)
+        superviviente.style.transition = 'opacity 0.5s';
+        superviviente.style.opacity = 0;
+
+        setTimeout(() => {
+            // Regresar el helicóptero a la base
+            heli.style.left = heliX + 'px';
+            heli.style.top = heliY + 'px';
+        }, 2000);
+    }, 2000);
+}
+>>>>>>> Stashed changes
 
     let heli = document.querySelector('.heli');
     let heliPic = document.querySelector('.heliPic');
