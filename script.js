@@ -167,7 +167,3 @@ window.onload = function() {
     posicionarSupervivientes(listaSupervivientes);
 };
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
