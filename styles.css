@@ -2,6 +2,10 @@
     margin: 0px;
     padding: 0px;
 }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 body{
     font-family: "Tiny5", serif;
     font-weight: 200;
@@ -34,17 +38,20 @@ h2{
     backdrop-filter: blur(2px);
     z-index: 10;
 }
+
 .menu:hover{
     transition-delay:0.1s;
     background-color: rgba(121, 121, 121, 0.221);
     backdrop-filter: blur(6px);
     transform: translateY(-130px);
 }
+
 .sonido{
     display: flex;
     align-items: flex-start;
     flex-direction: column;
 }
+
 button{
     transition: 0.13s ease;
     background-color: #ff9100; 
@@ -59,12 +66,14 @@ button{
     margin-right: 15px;
     margin-top: 20px;
 }
+
 button:hover{ 
     color: #ffffff; 
     background-color: rgb(102, 102, 102);  
     cursor: pointer;
     border-color: #ffffff;
 } 
+
 button:hover:active{  
     background-color: #1d9100c9;  
     color: #ffffff; 
@@ -72,14 +81,17 @@ button:hover:active{
     transform: scale(0.95);
     box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.457);
 }
+
 .botonMusica{
     border-radius: 0.5em;
 }
+
 .botonesAudio{
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .sonido{
     display: flex;
     align-items: start;
@@ -101,8 +113,8 @@ button:hover:active{
     z-index: 2;
     position: absolute; 
     top: 50%; 
-    right: 0; 
-    transform: translateY(-50%); 
+    right: 15px; 
+    transform: translateY(-50%);  
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -114,6 +126,80 @@ button:hover:active{
 }
 
 .heliPic{
-    height: 120px;
+    height: 100px;
     transform: rotate(90deg);
+<<<<<<< Updated upstream
+=======
+    filter: drop-shadow(8px -3px 3px  rgba(0, 0, 0, 0.555));
+}
+
+@keyframes heliPic {
+    0%{
+        filter: drop-shadow(8px -3px 3px  rgba(0, 0, 0, 0.555));
+        height: 100px;
+    }
+    10%{
+        filter: drop-shadow(50px -3px 3px  rgba(0, 0, 0, 0.555));
+        height: 140px;
+    }
+    90%{
+        filter: drop-shadow(50px -3px 3px  rgba(0, 0, 0, 0.555));
+        height: 140px;
+    }
+    100%{
+        filter: drop-shadow(8px -3px 3px  rgba(0, 0, 0, 0.555));
+        height: 100px;
+    }
+}
+
+.superviviente {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url(media/survivor.gif);
+    background-size: cover;
+    background-position: center;
+    background-position: center;
+    background-size: cover;
+    filter: drop-shadow(5px 5px 3px  rgba(10, 10, 10, 0.349));
+}
+
+.comida{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url(media/pizza.png);
+    background-position: center;
+    background-size: cover;
+    filter: drop-shadow(1px 1px 5px  rgb(255, 255, 255));
+}
+
+@keyframes comida {
+    0%{
+        top: var(--startY);
+        left: var(--startX);
+    }
+    50%{
+        top: var(--endY);
+        left: var(--endX);
+    }
+    60%{
+        top: var(--endY);
+        left: var(--endX);
+    }
+    100%{
+        top: var(--startY);
+        left: var(--startX);
+    }
+}
+
+@keyframes desaparicion {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+
+>>>>>>> Stashed changes
 }
