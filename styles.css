@@ -108,17 +108,15 @@ button:hover:active{
     filter: drop-shadow(8px 8px 5px  rgba(0, 0, 0, 0.521));
 }
 
-.heli{
+.heli {
     z-index: 2;
     position: absolute; 
     top: 50%; 
-    right: 15px; 
-    transform: translateY(-50%);  
+    left: 90%;
+    transform: translate(-50%, -50%);
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
-    
 }
 
 .basePic{
@@ -131,7 +129,7 @@ button:hover:active{
     filter: drop-shadow(5px -2px 1px  rgba(0, 0, 0, 0.555));
     animation-name: heliPicA;
     animation-timing-function: ease-in-out;
-    animation-duration: 4s;
+    animation-duration: 6s;
 }
 .heliPic2{
     height: 100px;
