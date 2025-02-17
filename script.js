@@ -3,6 +3,8 @@ let listaSupervivientes = document.getElementsByClassName("superviviente");
 let superviviente = document.querySelector('.superviviente');
 let pantallaX = (window.innerWidth)*0.95;
 let pantallaY = (window.innerHeight)*0.95;
+let contadorRescatados = 0;
+let contadorFallecidos = 0;
 
 let helicopteroActivo = false;
 
@@ -135,6 +137,7 @@ function rescatarSuperviviente(supervivienteSeleccionado) {
             heli.style.left = heliX + 'px';
             heli.style.top = heliY + 'px';
             heliAnimacion();
+            rescatados();             //Actualizar marcador cuando los rescatas
             supervivienteSeleccionado.remove();
             setTimeout(() => {
                 helicopteroActivo = false; // Reactivar el helicóptero después del rescate
@@ -142,6 +145,7 @@ function rescatarSuperviviente(supervivienteSeleccionado) {
         }, 1000); //tiempo de espera en el sitio del superviviente
     }, 6000); //tiempo de visualización del superviviente
     setTimeout(heliAnimacion, 13000);
+
 }
 
 function desaparicionComida(idComida){
@@ -281,9 +285,10 @@ function temporizadorVidaSuperviviente(superviviente) {
             superviviente.style.animation = 'desaparicion 3s ease-out forwards'; 
             //cambiar imagen superviviente por skull
             superviviente.style.backgroundImage = 'url("media/skull.gif")'; 
-            setTimeout(function() { eliminarSuperviviente(superviviente); }, 3000); 
+            setTimeout(eliminarSuperviviente,3000, superviviente); 
         }
     }, 1000);
+    
 }
 
 // Función para reiniciar el contador cuando un superviviente recoge comida
@@ -295,7 +300,8 @@ function reiniciarContador(superviviente) {
 // Eliminar superviviente después de la animación
 function eliminarSuperviviente(superviviente) {
     if (superviviente) { 
-        superviviente.style.display = "none"; 
+        superviviente.remove(); 
+        fallecidos();    // Actualiza marcador fallecidos cuando mueren
     }
 }
 function cambioEscenario(){
@@ -304,3 +310,20 @@ function cambioEscenario(){
 function cambioEscenario2(){
     document.querySelector('.gameBg').style.backgroundImage = "url('media/bg2.png')";
 }
+
+
+
+// Marcador de supervivientes rescatados y fallecidos.
+function marcador() {
+    document.getElementById("rescatados").innerHTML = `Rescatados: ${contadorRescatados}`;
+    document.getElementById("fallecidos").innerHTML = `Fallecidos: ${contadorFallecidos}`;
+}
+function rescatados() {
+    contadorRescatados++; 
+    marcador();
+}
+function fallecidos() {
+    contadorFallecidos++; 
+    marcador();
+}
+
