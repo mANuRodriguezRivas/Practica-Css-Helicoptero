@@ -1,8 +1,8 @@
 let contenedorPrincipal = document.querySelector('.gameBg');
 let listaSupervivientes = document.getElementsByClassName("superviviente");
 let superviviente = document.querySelector('.superviviente');
-let pantallaX = window.innerWidth;
-let pantallaY = window.innerHeight;
+let pantallaX = (window.innerWidth)*0.95;
+let pantallaY = (window.innerHeight)*0.95;
 
 let helicopteroActivo = false;
 
@@ -130,7 +130,8 @@ function rescatarSuperviviente(supervivienteSeleccionado) {
         setTimeout(() => {
             heli.style.left = heliX + 'px';
             heli.style.top = heliY + 'px';
-            heliAnimacion()
+            heliAnimacion();
+            supervivienteSeleccionado.remove();
             setTimeout(() => {
                 helicopteroActivo = false; // Reactivar el helicóptero después del rescate
             }, 6000); // Tiempo de espera para activar el heli de nuevo
@@ -274,7 +275,6 @@ function temporizadorVidaSuperviviente(superviviente) {
             superviviente.style.animation = 'desaparicion 3s ease-out forwards'; 
             //cambiar imagen superviviente por skull
             superviviente.style.backgroundImage = 'url("media/skull.gif")'; 
-
             setTimeout(function() { eliminarSuperviviente(superviviente); }, 3000); 
         }
     }, 1000);
