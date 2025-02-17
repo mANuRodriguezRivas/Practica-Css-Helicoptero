@@ -111,6 +111,8 @@ function rescatarSuperviviente(supervivienteSeleccionado) {
     helicopteroActivo = true; // Bloquear nuevas órdenes mientras se mueve
     supervivienteSeleccionado.onclick = '';
     supervivienteSeleccionado.classList.add('rescatando');
+    supervivienteSeleccionado.classList.add('rescatado');
+
     let heli = document.querySelector('.heli');
     let heliX = heli.offsetLeft;
     let heliY = heli.offsetTop;
@@ -119,11 +121,13 @@ function rescatarSuperviviente(supervivienteSeleccionado) {
 
     // Mover el helicóptero hasta el superviviente con animación
     heli.style.transition = 'top 6s linear, left 6s linear';
-    heli.style.left = supX + 'px';
+    heli.style.left = supX + 'px'; //calcular el coseno
     heli.style.top = supY + 'px';
     heliAnimacion();
     setTimeout(() => {
-        supervivienteSeleccionado.style.opacity = 0; // Simula el rescate
+        //supervivienteSeleccionado.style.opacity = 0; // Simula el rescate
+        supervivienteSeleccionado.classList.add('rescatado2');
+
         heliAnimacion();
         setTimeout(() => {
             heli.style.left = heliX + 'px';
@@ -311,4 +315,5 @@ function fallecidos() {
     contadorFallecidos++; 
     marcador();
 }
+
 
