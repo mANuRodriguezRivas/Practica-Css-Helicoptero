@@ -46,7 +46,6 @@ h2{
 
 .sonido{
     display: flex;
-    align-items: flex-start;
 }
 
 button{
@@ -167,6 +166,31 @@ button:hover:active{
     background-size: cover;
     filter: drop-shadow(5px 5px 3px  rgba(10, 10, 10, 0.349));
 }
+.rescatado{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url(media/survivor.gif);
+    background-size: cover;
+    background-position: center;
+    background-position: center;
+    background-size: cover;
+    filter: drop-shadow(5px 5px 3px  rgba(10, 10, 10, 0.349));
+
+    animation-name: desaparicion;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1.5s;
+
+}
+@keyframes comidaMove {
+    0%{
+    }
+    100%{
+        transform: rotate(25deg) scale(1.2);
+    }
+    
+}
+
 
 .comida{
     position: absolute;
