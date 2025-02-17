@@ -253,6 +253,7 @@ function heliAnimacionDesact(){
 function temporizadorVidaSuperviviente(superviviente) {
     let contador = superviviente.querySelector(".contador"); 
 
+
     if (!contador) return; 
 
     let tiempoRestante = 20;
@@ -271,6 +272,8 @@ function temporizadorVidaSuperviviente(superviviente) {
         if (tiempoRestante <= 0) {
             clearInterval(superviviente.intervalo);
             superviviente.style.animation = 'desaparicion 3s ease-out forwards'; 
+            //cambiar imagen superviviente por skull
+            superviviente.style.backgroundImage = 'url("media/skull.gif")'; 
 
             setTimeout(function() { eliminarSuperviviente(superviviente); }, 3000); 
         }
