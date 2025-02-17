@@ -20,7 +20,7 @@ let anchoComida = 50;
 let altComida = 50;
 
 posicionarSupervivientes(listaSupervivientes);
-setInterval(generaPosicionComida, 5000);
+setInterval(generaPosicionComida, 4000);
 
 function accion(supervivienteSeleccionado){
     if (!helicopteroActivo)
@@ -66,8 +66,7 @@ function pintarComidas(contenedorComida){
         contenedorComida.appendChild(divComida);
         setTimeout(function(){
             arrayComida.splice(i, 1);
-            divComida.remove();
-        }, 10000)
+        }, 6000)
     }
 }
 
@@ -109,15 +108,14 @@ function recoleccionComida(supervivienteSeleccionado){
 // Rescatar superviviente con el helicóptero
 function rescatarSuperviviente(supervivienteSeleccionado) {
     if (helicopteroActivo) return; // Si ya está en movimiento, no hacer nada
+    helicopteroActivo = true; // Bloquear nuevas órdenes mientras se mueve
     supervivienteSeleccionado.onclick = '';
-    supervivienteSeleccionado.classList.add('rescatado');
+    supervivienteSeleccionado.classList.add('rescatando');
     let heli = document.querySelector('.heli');
     let heliX = heli.offsetLeft;
     let heliY = heli.offsetTop;
     let supX = supervivienteSeleccionado.offsetLeft;
     let supY = supervivienteSeleccionado.offsetTop;
-
-    helicopteroActivo = true; // Bloquear nuevas órdenes mientras se mueve
 
     // Mover el helicóptero hasta el superviviente con animación
     heli.style.transition = 'top 6s linear, left 6s linear';
@@ -126,7 +124,7 @@ function rescatarSuperviviente(supervivienteSeleccionado) {
     heliAnimacion();
     setTimeout(() => {
         supervivienteSeleccionado.style.opacity = 0; // Simula el rescate
-        heliAnimacion()
+        heliAnimacion();
         setTimeout(() => {
             heli.style.left = heliX + 'px';
             heli.style.top = heliY + 'px';
@@ -145,16 +143,14 @@ function rescatarSuperviviente(supervivienteSeleccionado) {
 function desaparicionComida(idComida){
     let comida = document.getElementById(idComida);
     comida.style.animation = 'desaparicion 0.5s 3s ease-out forwards';
-    setTimeout(pintarComidas, 4000, contenedorPrincipal)
-
 }
 // Cambio cursor cuando hover sobre superviviente (si helicoptero es activo)
 document.addEventListener('mouseover', function(e){
-    if (e.target.classList.contains('superviviente') && helicopteroActivo &&!e.target.classList.contains('rescatado')){
+    if (e.target.classList.contains('superviviente') && helicopteroActivo &&!e.target.classList.contains('rescatando')){
         e.target.style.cursor = 'url("media/cursorComida.png"), auto';
-    } else if (e.target.classList.contains('superviviente') && !helicopteroActivo && !e.target.classList.contains('rescatado')) {
+    } else if (e.target.classList.contains('superviviente') && !helicopteroActivo && !e.target.classList.contains('rescatando')) {
         e.target.style.cursor = 'pointer';
-    } else if (e.target.classList.contains('rescatado') && helicopteroActivo) {
+    } else if (e.target.classList.contains('rescatando') && helicopteroActivo) {
         e.target.style.cursor = 'not-allowed';
     }
 })
@@ -185,7 +181,6 @@ function mute() {
 // Aparición aleatoria de supervivientes sin colisiones.
 function coordenadasAleatoriasSupervivientes() {
     let coordRandomX, coordRandomY, overlap;
-
     do {
         coordRandomX = Math.round(Math.random() * (pantallaX - anchoSuperviviente - 200));
         coordRandomY = Math.round(Math.random() * (pantallaY - altoSuperviviente));
@@ -286,7 +281,7 @@ function temporizadorVidaSuperviviente(superviviente) {
 // Función para reiniciar el contador cuando un superviviente recoge comida
 function reiniciarContador(superviviente) {
     temporizadorVidaSuperviviente(superviviente);
-    setTimeout(function() {superviviente.classList.remove('comiendo')}, 3000);
+    setTimeout(function() {superviviente.classList.remove('comiendo')}, 2000);
 }
 
 // Eliminar superviviente después de la animación
@@ -302,8 +297,6 @@ function cambioEscenario(){
 function cambioEscenario2(){
     document.querySelector('.gameBg').style.backgroundImage = "url('media/bg2.png')";
 }
-
-
 
 // Marcador de supervivientes rescatados y fallecidos.
 function marcador() {
