@@ -106,7 +106,6 @@ function recoleccionComida(supervivienteSeleccionado) {
 
 // Rescatar superviviente con el helicóptero
 function rescatarSuperviviente(supervivienteSeleccionado) {
-    heliAnimacionDesact()
     if (helicopteroActivo) return; // Si ya está en movimiento, no hacer nada
 
     let heli = document.querySelector('.heli');
@@ -121,20 +120,20 @@ function rescatarSuperviviente(supervivienteSeleccionado) {
     heli.style.transition = 'top 6s linear, left 6s linear';
     heli.style.left = supX + 'px';
     heli.style.top = supY + 'px';
-
+    heliAnimacion();
     setTimeout(() => {
         supervivienteSeleccionado.style.opacity = 0; // Simula el rescate
-
+        heliAnimacion()
         setTimeout(() => {
             heli.style.left = heliX + 'px';
             heli.style.top = heliY + 'px';
-
+            heliAnimacion()
             setTimeout(() => {
                 helicopteroActivo = false; // Reactivar el helicóptero después del rescate
             }, 6000); // Tiempo de espera para activar el heli de nuevo
         }, 1000); //tiempo de espera en el sitio del superviviente
     }, 6000); //tiempo de visualización del superviviente
-    heliAnimacion();
+    setTimeout(heliAnimacion, 13000);
     
 }
 
@@ -221,7 +220,7 @@ window.onload = function() {
 //Añadir clase de helicoptero Animado
 function heliAnimacion(){
     let vuelo = document.getElementById('heliFoto');
-    vuelo.classList.add('heliPic2');
+    vuelo.classList.toggle('heliPic2');
 }
 
 function heliAnimacionDesact(){
