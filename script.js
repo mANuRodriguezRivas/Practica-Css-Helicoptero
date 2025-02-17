@@ -106,6 +106,7 @@ function recoleccionComida(supervivienteSeleccionado) {
 
 // Rescatar superviviente con el helicóptero
 function rescatarSuperviviente(supervivienteSeleccionado) {
+    heliAnimacionDesact()
     if (helicopteroActivo) return; // Si ya está en movimiento, no hacer nada
 
     let heli = document.querySelector('.heli');
