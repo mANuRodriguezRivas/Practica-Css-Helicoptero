@@ -4,9 +4,7 @@ let superviviente = document.querySelector('.superviviente');
 let pantallaX = window.innerWidth;
 let pantallaY = window.innerHeight;
 
-/* ¡¡¡¡¡¡¡¡¡VARIABLE TEMPORANEA (QUITARLA CUANDO TENEMOS MECANICA DE MOVIMIENTO HELICOPTERO)!!!!!!!! */
-let helicopteroActivo = true;
-
+let helicopteroActivo = false;
 
 let arrayComida = [
     {x: 0, y: 0},
@@ -27,6 +25,12 @@ let altComida = 50;
 
 posicionarSupervivientes(listaSupervivientes);
 
+function accion(supervivienteSeleccionado){
+    if (!helicopteroActivo)
+        rescatarSuperviviente(supervivienteSeleccionado)
+    else
+        recoleccionComida(supervivienteSeleccionado)
+}
 
 //Genera posición aleatoria para las comida sin que se sobrelapan
 function generaPosicionComida(){
@@ -145,6 +149,8 @@ function desaparicionComida(idComida){
 document.addEventListener('mouseover', function(e){
     if (e.target.classList.contains('superviviente') && helicopteroActivo){
         e.target.style.cursor = 'url("media/cursorComida.png"), auto';
+    } else if (e.target.classList.contains('superviviente') && !helicopteroActivo) {
+        e.target.style.cursor = 'pointer';
     }
 })
 
