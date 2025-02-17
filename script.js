@@ -103,6 +103,38 @@ function recoleccionComida(supervivienteSeleccionado){
     }
 }
 
+// Rescatar superviviente con el helicóptero
+function rescatarSuperviviente(supervivienteSeleccionado) {
+    if (helicopteroActivo) return; // Si ya está en movimiento, no hacer nada
+
+    let heli = document.querySelector('.heli');
+    let heliX = heli.offsetLeft;
+    let heliY = heli.offsetTop;
+    let supX = supervivienteSeleccionado.offsetLeft;
+    let supY = supervivienteSeleccionado.offsetTop;
+
+    helicopteroActivo = true; // Bloquear nuevas órdenes mientras se mueve
+
+    // Mover el helicóptero hasta el superviviente con animación
+    heli.style.transition = 'top 6s linear, left 6s linear';
+    heli.style.left = supX + 'px';
+    heli.style.top = supY + 'px';
+    heliAnimacion();
+    setTimeout(() => {
+        supervivienteSeleccionado.style.opacity = 0; // Simula el rescate
+        heliAnimacion()
+        setTimeout(() => {
+            heli.style.left = heliX + 'px';
+            heli.style.top = heliY + 'px';
+            heliAnimacion()
+            setTimeout(() => {
+                helicopteroActivo = false; // Reactivar el helicóptero después del rescate
+            }, 6000); // Tiempo de espera para activar el heli de nuevo
+        }, 1000); //tiempo de espera en el sitio del superviviente
+    }, 6000); //tiempo de visualización del superviviente
+    setTimeout(heliAnimacion, 13000);
+}
+
 function desaparicionComida(idComida){
     let comida = document.getElementById(idComida);
     comida.style.animation = 'desaparicion 0.5s 3s ease-out forwards';
@@ -197,6 +229,19 @@ window.onload = function() {
 
     posicionarSupervivientes(listaSupervivientes);
 };
+
+//Añadir clase de helicoptero Animado
+function heliAnimacion(){
+    let vuelo = document.getElementById('heliFoto');
+    vuelo.classList.toggle('heliPic2');
+}
+
+function heliAnimacionDesact(){
+    let vuelo = document.getElementById('heliFoto');
+    vuelo.classList.add('heliPic');
+
+    
+}
 
 // Gestión del tiempo de vida con contador
 function temporizadorVidaSuperviviente(superviviente) {
