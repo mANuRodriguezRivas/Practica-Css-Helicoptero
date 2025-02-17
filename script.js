@@ -125,7 +125,8 @@ function rescatarSuperviviente(supervivienteSeleccionado) {
     heli.style.top = supY + 'px';
     heliAnimacion();
     setTimeout(() => {
-        supervivienteSeleccionado.style.opacity = 0; // Simula el rescate
+        // supervivienteSeleccionado.style.opacity = 0; // Simula el rescate
+        supervivienteSeleccionado.classList.add('rescatado2');
         heliAnimacion()
         setTimeout(() => {
             heli.style.left = heliX + 'px';
