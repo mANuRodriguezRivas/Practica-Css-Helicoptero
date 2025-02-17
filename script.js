@@ -28,8 +28,10 @@ posicionarSupervivientes(listaSupervivientes);
 function accion(supervivienteSeleccionado){
     if (!helicopteroActivo)
         rescatarSuperviviente(supervivienteSeleccionado)
-    else
-        recoleccionComida(supervivienteSeleccionado)
+    else{
+        if (!supervivienteSeleccionado.classList.contains('comiendo'))
+            recoleccionComida(supervivienteSeleccionado);
+    }
 }
 
 //Genera posición aleatoria para las comida sin que se sobrelapan
@@ -77,7 +79,7 @@ function pintarComidas(contenedorComida){
 function recoleccionComida(supervivienteSeleccionado){
     supervivienteSeleccionadoY = parseFloat(supervivienteSeleccionado.style.top);
     supervivienteSeleccionadoX = parseFloat(supervivienteSeleccionado.style.left);
-
+    supervivienteSeleccionado.classList.add('comiendo');
     supervivienteSeleccionado.style.animation = 'none';
     void supervivienteSeleccionado.offsetWidth;
 
@@ -99,6 +101,7 @@ function recoleccionComida(supervivienteSeleccionado){
         supervivienteSeleccionado.style.animation = 'comida 5s ease-out';
         for (let i=0; i<arrayComida.length; i++){
             if (arrayComida[i].x == closestComidaCoords.x && arrayComida[i].y == closestComidaCoords.y){
+                setTimeout(reiniciarContador, 3000, supervivienteSeleccionado);
                 arrayComida.splice(i, 1);
                 desaparicionComida(`comida_${i}`);
                 break;
@@ -110,7 +113,8 @@ function recoleccionComida(supervivienteSeleccionado){
 // Rescatar superviviente con el helicóptero
 function rescatarSuperviviente(supervivienteSeleccionado) {
     if (helicopteroActivo) return; // Si ya está en movimiento, no hacer nada
-
+    supervivienteSeleccionado.onclick = '';
+    supervivienteSeleccionado.classList.add('rescatado');
     let heli = document.querySelector('.heli');
     let heliX = heli.offsetLeft;
     let heliY = heli.offsetTop;
@@ -148,10 +152,12 @@ function desaparicionComida(idComida){
 }
 // Cambio cursor cuando hover sobre superviviente (si helicoptero es activo)
 document.addEventListener('mouseover', function(e){
-    if (e.target.classList.contains('superviviente') && helicopteroActivo){
+    if (e.target.classList.contains('superviviente') && helicopteroActivo &&!e.target.classList.contains('rescatado')){
         e.target.style.cursor = 'url("media/cursorComida.png"), auto';
-    } else if (e.target.classList.contains('superviviente') && !helicopteroActivo) {
+    } else if (e.target.classList.contains('superviviente') && !helicopteroActivo && !e.target.classList.contains('rescatado')) {
         e.target.style.cursor = 'pointer';
+    } else if (e.target.classList.contains('rescatado') && helicopteroActivo) {
+        e.target.style.cursor = 'not-allowed';
     }
 })
 
@@ -282,8 +288,8 @@ function temporizadorVidaSuperviviente(superviviente) {
 
 // Función para reiniciar el contador cuando un superviviente recoge comida
 function reiniciarContador(superviviente) {
-    console.log(" Reiniciando contador para", superviviente);
     temporizadorVidaSuperviviente(superviviente);
+    superviviente.classList.remove('comiendo');
 }
 
 // Eliminar superviviente después de la animación
@@ -291,11 +297,4 @@ function eliminarSuperviviente(superviviente) {
     if (superviviente) { 
         superviviente.style.display = "none"; 
     }
-}
-
-// Función que se llama cuando un superviviente recoge comida
-function recogerComida(superviviente) {
-    console.log("Superviviente ha recogido comida:", superviviente);
-    reiniciarContador(superviviente); 
-    recogerComida(superviviente);
 }
