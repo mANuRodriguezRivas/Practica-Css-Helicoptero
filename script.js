@@ -8,13 +8,7 @@ let contadorFallecidos = 0;
 
 let helicopteroActivo = false;
 
-let arrayComida = [
-    {x: 0, y: 0},
-    {x: 0, y: 0},
-    {x: 0, y: 0},
-    {x: 0, y: 0},
-    {x: 0, y: 0}
-];
+let arrayComida = [];
 
 
 let anchoSuperviviente = 50;
@@ -26,6 +20,7 @@ let anchoComida = 50;
 let altComida = 50;
 
 posicionarSupervivientes(listaSupervivientes);
+setInterval(generaPosicionComida, 5000);
 
 function accion(supervivienteSeleccionado){
     if (!helicopteroActivo)
@@ -38,25 +33,21 @@ function accion(supervivienteSeleccionado){
 
 //Genera posición aleatoria para las comida sin que se sobrelapan
 function generaPosicionComida(){
-    for (let i=0; i<arrayComida.length; i++){
-        let randomX;
-        let randomY;
-        let overlap;
-        do{
-            randomX = Math.random() * (pantallaX - anchoComida - 200);
-            randomY = Math.random() * (pantallaY - altComida);
-
-            overlap = false;
-            for (let j = 0; j < i; j++) {
-                if (Math.abs(randomX - arrayComida[j].x) < anchoComida && Math.abs(randomY - arrayComida[j].y) < altComida) {
-                    overlap = true;
-                    break;
-                }
+    let randomX;
+    let randomY;
+    let overlap;
+    do {
+        randomX = Math.random() * (pantallaX - anchoComida - 200);
+        randomY = Math.random() * (pantallaY - altComida);
+        overlap = false;
+        for (let i = 0; i < arrayComida.length; i++) {
+            if (Math.abs(randomX - arrayComida[i].x) < anchoComida && Math.abs(randomY - arrayComida[i].y) < altComida) {
+                overlap = true;
+                break;
             }
-        } while (overlap);
-        arrayComida[i].x = randomX;
-        arrayComida[i].y = randomY;
-    }
+        }
+    } while (overlap);
+    arrayComida.push({x: randomX, y: randomY})
     pintarComidas(contenedorPrincipal);
 }
 
@@ -67,18 +58,22 @@ function pintarComidas(contenedorComida){
         comidas[i].remove();
     }
     for (let i=0; i<arrayComida.length; i++){
-
         let divComida = document.createElement('div');
         divComida.classList.add('comida');
         divComida.style.top = arrayComida[i].y + 'px';
         divComida.style.left = arrayComida[i].x + 'px';
         divComida.id = `comida_${i}`;
         contenedorComida.appendChild(divComida);
+        setTimeout(function(){
+            arrayComida.splice(i, 1);
+            divComida.remove();
+        }, 10000)
     }
 }
 
 //Recolección comida
 function recoleccionComida(supervivienteSeleccionado){
+    if (helicopteroActivo && arrayComida.length > 0){
     supervivienteSeleccionadoY = parseFloat(supervivienteSeleccionado.style.top);
     supervivienteSeleccionadoX = parseFloat(supervivienteSeleccionado.style.left);
     supervivienteSeleccionado.classList.add('comiendo');
@@ -87,8 +82,7 @@ function recoleccionComida(supervivienteSeleccionado){
 
     let closestComidaCoords = [];
     let closestComida = 0;
-
-    if (helicopteroActivo && arrayComida.length > 0){
+    
         for (let i=0; i<arrayComida.length; i++){
             let distance = Math.sqrt(Math.pow(arrayComida[i].x - supervivienteSeleccionadoX, 2) + Math.pow(arrayComida[i].y - supervivienteSeleccionadoY, 2));
             if (i == 0 || distance < closestComida) {
@@ -229,10 +223,8 @@ function posicionarSupervivientes(supervivientes) {
         contador.classList.add("contador");
         supervivientes[i].appendChild(contador);
 
-        temporizadorVidaSuperviviente(supervivientes[i], contador);
+        temporizadorVidaSuperviviente(supervivientes[i]);
     }
-
-    generaPosicionComida();
 }
 
 // Lista de supervivientes y los posiciona cuando la página carga
@@ -294,7 +286,7 @@ function temporizadorVidaSuperviviente(superviviente) {
 // Función para reiniciar el contador cuando un superviviente recoge comida
 function reiniciarContador(superviviente) {
     temporizadorVidaSuperviviente(superviviente);
-    superviviente.classList.remove('comiendo');
+    setTimeout(function() {superviviente.classList.remove('comiendo')}, 3000);
 }
 
 // Eliminar superviviente después de la animación
