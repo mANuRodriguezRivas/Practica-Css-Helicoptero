@@ -38,7 +38,7 @@ function generaPosicionComida(){
     let overlap;
     do {
         randomX = Math.random() * (pantallaX - anchoComida - 200);
-        randomY = Math.random() * (pantallaY - altComida);
+        randomY = Math.random() * (pantallaY - altComida - 70) + 70;
         overlap = false;
         for (let i = 0; i < arrayComida.length; i++) {
             if (Math.abs(randomX - arrayComida[i].x) < anchoComida && Math.abs(randomY - arrayComida[i].y) < altComida) {
@@ -188,7 +188,7 @@ function coordenadasAleatoriasSupervivientes() {
 
     do {
         coordRandomX = Math.round(Math.random() * (pantallaX - anchoSuperviviente - 200));
-        coordRandomY = Math.round(Math.random() * (pantallaY - altoSuperviviente));
+        coordRandomY = Math.round(Math.random() * (pantallaY - altoSuperviviente - 70)) + 70;
         overlap = false;
         for (let i = 0; i < posicionesSupervivientes.length; i++) {
             let otroSupervivienteX = posicionesSupervivientes[i]['x'];

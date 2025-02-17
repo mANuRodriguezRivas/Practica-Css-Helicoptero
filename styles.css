@@ -258,3 +258,15 @@ button:hover:active{
     }
 
 }
+.marcadores {
+    position: absolute;
+    top: 15px; 
+    left: 15px; 
+    font-size: 22px;
+    z-index: 5; 
+    background: rgba(0, 0, 0, 0.5);
+    color: white; 
+    padding: 10px; 
+    border-radius: 5px; 
+    height: 70px;
+}
