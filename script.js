@@ -298,3 +298,9 @@ function eliminarSuperviviente(superviviente) {
         superviviente.style.display = "none"; 
     }
 }
+function cambioEscenario(){
+    document.querySelector('.gameBg').style.backgroundImage = "url('media/bg.png')";
+}
+function cambioEscenario2(){
+    document.querySelector('.gameBg').style.backgroundImage = "url('media/bg2.png')";
+}

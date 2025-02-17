@@ -47,7 +47,6 @@ h2{
 .sonido{
     display: flex;
     align-items: flex-start;
-    flex-direction: column;
 }
 
 button{
