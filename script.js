@@ -244,9 +244,9 @@ function heliAnimacion(){
     vuelo.classList.toggle('heliPic2');
 }
 
-function heliAnimacionDesact(){
+function heliAnimacionVuelta(){
     let vuelo = document.getElementById('heliFoto');
-    vuelo.classList.add('heliPic');
+    vuelo.classList.add('heliPicVuelta');
 
     
 }

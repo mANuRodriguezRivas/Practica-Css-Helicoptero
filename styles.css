@@ -157,6 +157,20 @@ button:hover:active{
         filter: drop-shadow(50px -13px 8px  rgba(0, 0, 0, 0.555));
         height: 130px;
     }
+    30%{
+        height: 115px;
+    }
+    40%{
+        height: 130px;
+    }
+    50%{
+    }
+    60%{
+        height: 115px;
+    }
+    80%{
+        /* transform: rotate(90deg); */
+    }
     90%{
         filter: drop-shadow(50px -13px 8px  rgba(0, 0, 0, 0.555));
         height: 130px;
@@ -164,6 +178,50 @@ button:hover:active{
     100%{
         filter: drop-shadow(8px -2px 1px  rgba(0, 0, 0, 0.555));
         height: 100px;
+        /* transform: rotate(260deg); */
+    }
+}
+.heliPicVuelta{
+    height: 100px;
+    transform: rotate(260deg);
+    filter: drop-shadow(5px -2px 1px  rgba(0, 0, 0, 0.555));
+    animation-name: heliPicV;
+    animation-timing-function: ease-in-out;
+    animation-duration: 6s;
+    /* animation-iteration-count: 2; */
+}
+
+@keyframes heliPicV {
+    0%{
+        filter: drop-shadow(8px -2px 1px  rgba(0, 0, 0, 0.555));
+        height: 100px;
+    }
+    10%{
+        filter: drop-shadow(50px -13px 8px  rgba(0, 0, 0, 0.555));
+        height: 130px;
+    }
+    30%{
+        height: 115px;
+    }
+    40%{
+        height: 130px;
+    }
+    50%{
+    }
+    60%{
+        height: 115px;
+    }
+    80%{
+        transform: rotate(260deg);
+    }
+    90%{
+        filter: drop-shadow(50px -13px 8px  rgba(0, 0, 0, 0.555));
+        height: 130px;
+    }
+    100%{
+        filter: drop-shadow(8px -2px 1px  rgba(0, 0, 0, 0.555));
+        height: 100px;
+        transform: rotate(90deg);
     }
 }
 
