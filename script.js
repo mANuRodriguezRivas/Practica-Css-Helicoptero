@@ -66,7 +66,7 @@ function pintarComidas(contenedorComida){
         contenedorComida.appendChild(divComida);
         setTimeout(function(){
             arrayComida.splice(i, 1);
-        }, 6000)
+        }, 10000)
     }
 }
 
@@ -109,7 +109,6 @@ function recoleccionComida(supervivienteSeleccionado){
 function rescatarSuperviviente(supervivienteSeleccionado) {
     if (helicopteroActivo) return; // Si ya está en movimiento, no hacer nada
     helicopteroActivo = true; // Bloquear nuevas órdenes mientras se mueve
-    supervivienteSeleccionado.onclick = '';
     supervivienteSeleccionado.classList.add('rescatando');
     supervivienteSeleccionado.classList.add('rescatado');
 
