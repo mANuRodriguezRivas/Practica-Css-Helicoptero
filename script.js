@@ -304,8 +304,8 @@ function cambioEscenario2(){
 
 // Marcador de supervivientes rescatados y fallecidos.
 function marcador() {
-    document.getElementById("rescatados").innerHTML = `Rescatados: ${contadorRescatados}`;
-    document.getElementById("fallecidos").innerHTML = `Fallecidos: ${contadorFallecidos}`;
+    document.getElementById("rescatados").innerHTML = `${contadorRescatados}`;
+    document.getElementById("fallecidos").innerHTML = `${contadorFallecidos}`;
 }
 function rescatados() {
     contadorRescatados++; 
