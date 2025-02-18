@@ -22,6 +22,7 @@ body{
 
 p{
     margin-right: 10px;
+    margin-left: 10px;
 }
 
 h2{
@@ -298,7 +299,7 @@ button:hover:active{
     
     font-size: 22px;
     z-index: 5; 
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.322);
     color: white; 
     padding: 15px; 
     margin: 10px;
