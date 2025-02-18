@@ -73,8 +73,8 @@ function pintarComidas(contenedorComida){
 //Recolección comida
 function recoleccionComida(supervivienteSeleccionado){
     if (helicopteroActivo && arrayComida.length > 0){
-    supervivienteSeleccionadoY = parseFloat(supervivienteSeleccionado.style.top);
-    supervivienteSeleccionadoX = parseFloat(supervivienteSeleccionado.style.left);
+    let supervivienteSeleccionadoY = parseFloat(supervivienteSeleccionado.style.top);
+    let supervivienteSeleccionadoX = parseFloat(supervivienteSeleccionado.style.left);
     supervivienteSeleccionado.classList.add('comiendo');
     supervivienteSeleccionado.style.animation = 'none';
     void supervivienteSeleccionado.offsetWidth;
