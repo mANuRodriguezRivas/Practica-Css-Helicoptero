@@ -133,6 +133,7 @@ function rescatarSuperviviente(supervivienteSeleccionado) {
             heli.style.top = heliY + 'px';
             heliAnimacion();
             rescatados();             //Actualizar marcador cuando los rescatas
+            clearInterval(supervivienteSeleccionado.intervalo);
             supervivienteSeleccionado.remove();
             setTimeout(() => {
                 helicopteroActivo = false; // Reactivar el helicóptero después del rescate
@@ -278,7 +279,6 @@ function temporizadorVidaSuperviviente(superviviente) {
             setTimeout(eliminarSuperviviente,3000, superviviente); 
         }
     }, 1000);
-    
 }
 
 // Función para reiniciar el contador cuando un superviviente recoge comida
